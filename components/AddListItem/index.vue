@@ -1,11 +1,12 @@
 <template>
   <div @click="action" v-bind:class="{'b-add-bottom': hasElements}" class="b-add">
-    <v-icon class="s-em_5">
-      mdi-plus
-    </v-icon>
+    <transition name="rotate-fade" appear>
+      <v-icon class="s-em_5">
+        mdi-plus
+      </v-icon>
+    </transition>
   </div>
 </template>
-
 <script>
 export default {
   name: 'AddListItem',

@@ -24,8 +24,12 @@
             <v-list-item v-touch:swipe.right="remove(index)" v-touch:swipe.left="archive(item)" @click="go('edit')" :key="item.id">
               <template>
                 <v-list-item-avatar>
-                  <v-icon v-if="item.isArchived === false" :class="['blue white--text']">mdi-image-edit-outline</v-icon>
-                  <v-icon v-else :class="['grey white--text']">mdi-archive</v-icon>
+                  <v-icon v-if="item.isArchived === false" :class="['blue white--text']">
+                    mdi-image-edit-outline
+                  </v-icon>
+                  <v-icon v-else :class="['grey white--text']">
+                    mdi-archive
+                  </v-icon>
                 </v-list-item-avatar>
                 <v-list-item-content>
                   <v-list-item-title v-text="item.title" />
