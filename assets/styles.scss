@@ -1,0 +1,38 @@
+@import "common.scss";
+
+.page-enter-active, .page-leave-active {
+  transition: opacity .5s;
+}
+.page-enter, .page-leave-active {
+  opacity: 0;
+}
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
+}
+
+/** @override vdr*/
+.draggable {
+  &.dragging {
+    opacity: 0.6;
+  }
+}
+
+.vdr.draggable,
+.vdr.resizable {
+  border: none;
+  &.active {
+    border: 1px dashed #000;
+  }
+}
+
+.handle {
+  width: 6px !important;
+  height: 6px !important;
+}
