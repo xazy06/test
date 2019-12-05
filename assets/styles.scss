@@ -26,9 +26,9 @@
 
 .vdr.draggable,
 .vdr.resizable {
-  border: none;
+  border: 1px dashed #555;
   &.active {
-    border: 1px dashed #000;
+    border: 1px dashed #fff;
   }
 }
 

@@ -17,7 +17,9 @@
               :grid="[1,1]"
               :key="index"
             >
-              <div v-if="(item.type === 'text')" @click.stop="select(item, index)" contenteditable="true" class="b-ground--text-item" />
+              <div v-if="(item.type === 'text')" @click.stop="select(item, index)" contenteditable="true" class="b-ground--text-item">
+                {{ item.properties.text }}
+              </div>
               <div v-if="(item.type === 'image')" @click.stop="select(item, index)" v-bind:style="{'background-image': `url(${item.properties.src})`}" class="b-ground--img-item" />
             </vue-draggable-resizable>
           </template>
