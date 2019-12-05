@@ -1,0 +1,17 @@
+@import "variables";
+
+.v-application {
+  font-weight: 100;
+}
+
+.s-em {
+  &_14 {
+    font-size: 14em;
+    &i {
+      font-size: 14em !important;
+    }
+  }
+  &_5 {
+    font-size: 5em;
+  }
+}
