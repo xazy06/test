@@ -21,7 +21,12 @@
       >
         <transition-group name="slide-fade" appear>
           <template v-for="(item, index) in items">
-            <v-list-item v-touch:swipe.right="remove(index)" v-touch:swipe.left="archive(item)" @click="go('edit')" :key="item.id">
+            <v-list-item
+              v-touch:swipe.right="remove(index)"
+              v-touch:swipe.left="archive(item)"
+              @click="go('edit')"
+              :key="item.id"
+            >
               <template>
                 <v-list-item-avatar>
                   <v-icon v-if="item.isArchived === false" :class="['blue white--text']">

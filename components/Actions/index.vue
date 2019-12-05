@@ -6,12 +6,12 @@
           align="center"
           justify="center"
         >
-          <v-btn v-if="remove" @click.prevent="removeAction" text default>
+          <v-btn v-if="remove" @click.stop="removeAction" icon default>
             <v-icon x-large>
               mdi-delete
             </v-icon>
           </v-btn>
-          <v-btn v-else @click="action" text primary>
+          <v-btn v-else @click.stop="action" icon primary>
             <v-icon x-large>
               mdi-check-bold
             </v-icon>
@@ -46,11 +46,16 @@ export default {
 
 <style lang="scss" scoped>
   .b-actions-bar {
+    transition: all ease-in-out 0.4s;
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 70px;
+    bottom: -12px;
+    left: -12px;
+    right: -12px;
+    height: 76px;
+    border-bottom: 3px solid #e91e63;
+    &:hover {
+      border-bottom: 7px solid #e91e63;
+    }
     &_inner {
       height: 100%;
     }

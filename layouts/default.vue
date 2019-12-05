@@ -38,13 +38,6 @@
         <nuxt />
       </v-container>
     </v-content>
-    <v-footer
-      :fixed="fixed"
-      v-touch:swipe.top="dialogInit"
-      app
-    >
-      <span>&copy; nuxt</span>
-    </v-footer>
     <notifications group="foo" />
   </v-app>
 </template>
@@ -72,7 +65,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'SIMPLE CONTENT EDITOR'
+      title: 'Vuetify layout'
     }
   },
   methods: {

@@ -20,14 +20,20 @@
               <div v-if="(item.type === 'text')" @click.stop="select(item, index)" contenteditable="true" class="b-ground--text-item">
                 {{ item.properties.text }}
               </div>
-              <div v-if="(item.type === 'image')" @click.stop="select(item, index)" v-bind:style="{'background-image': `url(${item.properties.src})`}" class="b-ground--img-item" />
+              <div
+                v-if="(item.type === 'image')"
+                @click.stop="select(item, index)"
+                v-bind:style="{'background-image': `url(${item.properties.src})`}"
+                class="b-ground--img-item"
+              >
+              </div>
             </vue-draggable-resizable>
           </template>
         </div>
 
-        <actions v-if="saveEnabled" :remove="flags.removeEnabled" :removeAction="removeElement" :action="save" />
+        <actions v-touch:swipe.top="showTypes" v-if="saveEnabled" :remove="flags.removeEnabled" :removeAction="removeElement" :action="save" />
       </div>
-      <types-modal :bridge="blocks" :autoOpen="true" :extra="saveEnabled" />
+      <types-modal ref="typesModal" :toggleHidden="true" :bridge="blocks" :autoOpen="true" :extra="saveEnabled" />
     </v-flex>
   </v-layout>
 </template>
@@ -94,8 +100,14 @@ export default {
       setTimeout(() => { this.unselect() }, 0)
     },
     removeElement () {
+      if (this.selectedIndex === null) {
+        throw new Error('unexpected selectedIndex value')
+      }
       this.blocks.splice(this.selectedIndex, 1)
       this.unselect()
+    },
+    showTypes () {
+      this.$refs.typesModal.dialog = true
     }
   }
 }
@@ -104,7 +116,7 @@ export default {
 <style lang="scss" scoped>
   .b-ground {
     width: 100%;
-    height: calc(100vh - 118px);
+    height: calc(100vh - 80px);
     position: relative;
     &-main {
       height: calc(100vh - 118px - 57px);

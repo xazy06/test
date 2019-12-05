@@ -24,14 +24,18 @@
               <div v-if="(item.type === 'text')" @click="select(item, index)" contenteditable="true" class="b-ground--text-item">
                 {{ item.properties.text }}
               </div>
-              <div v-if="(item.type === 'image')" @click="select(item, index)" v-bind:style="{'background-image': `url(${item.properties.src})`}" class="b-ground--img-item" />
+              <div
+                v-if="(item.type === 'image')"
+                @click="select(item, index)"
+                v-bind:style="{'background-image': `url(${item.properties.src})`}"
+                class="b-ground--img-item"></div>
             </vue-draggable-resizable>
           </template>
         </div>
 
-        <actions :remove="flags.removeEnabled" :removeAction="removeElement" :action="save" />
+        <actions v-touch:swipe.top="showTypes" v-if="saveEnabled" :remove="flags.removeEnabled" :removeAction="removeElement" :action="save" />
       </div>
-      <types-modal :bridge="blocks" :autoOpen="false" :extra="true" />
+      <types-modal :toggleHidden="true" ref="typesModal" :bridge="blocks" :autoOpen="false" :extra="saveEnabled" />
     </v-flex>
   </v-layout>
 </template>
@@ -54,29 +58,37 @@ export default {
       flags: {
         removeEnabled: false
       },
-      blocks: [{
-        id: 0,
-        type: 'image',
-        name: 'image',
-        properties: {
-          left: 0,
-          top: 0,
-          width: 250,
-          height: 150,
-          src: 'https://picsum.photos/350/165?random'
+      blocks: [
+        {
+          id: 0,
+          type: 'image',
+          name: 'image',
+          properties: {
+            left: 0,
+            top: 0,
+            width: 250,
+            height: 150,
+            src: 'https://picsum.photos/350/165?random'
+          }
+        },
+        {
+          id: 1,
+          type: 'text',
+          name: 'text',
+          properties: {
+            left: 0,
+            top: 200,
+            width: 150,
+            height: 50,
+            text: 'Solves.pro'
+          }
         }
-      }, {
-        id: 1,
-        type: 'text',
-        name: 'text',
-        properties: {
-          left: 0,
-          top: 200,
-          width: 150,
-          height: 50,
-          text: 'Solves.pro'
-        }
-      }]
+      ]
+    }
+  },
+  computed: {
+    saveEnabled () {
+      return this.blocks.length > 0
     }
   },
   watch: {
@@ -108,12 +120,11 @@ export default {
         this.selected.properties.top = y
       }
     },
-    async onActivated (item, index) {
-      await this.select(item, index)
+    onActivated (item, index) {
+      this.select(item, index)
     },
-    async onDeactivated () {
-      // setTimeout(() => { this.unselect() }, 0)
-      await this.unselect()
+    onDeactivated () {
+      setTimeout(() => { this.unselect() }, 0)
     },
     removeElement () {
       if (this.selectedIndex === null) {
@@ -121,6 +132,9 @@ export default {
       }
       this.blocks.splice(this.selectedIndex, 1)
       this.unselect()
+    },
+    showTypes () {
+      this.$refs.typesModal.dialog = true
     }
   }
 }
@@ -129,7 +143,7 @@ export default {
 <style lang="scss" scoped>
   .b-ground {
     width: 100%;
-    height: calc(100vh - 118px);
+    height: calc(100vh - 80px);
     position: relative;
     &-main {
       height: calc(100vh - 118px - 57px)

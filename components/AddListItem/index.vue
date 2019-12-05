@@ -1,7 +1,7 @@
 <template>
   <div @click="action" v-bind:class="{'b-add-bottom': hasElements}" class="b-add">
     <transition name="rotate-fade" appear>
-      <v-icon class="s-em_5">
+      <v-icon class="s-em_4">
         mdi-plus
       </v-icon>
     </transition>
@@ -29,14 +29,14 @@ export default {
     left: 0;
     bottom: 0;
     top: 0;
-    height: 80px;
-    width: 80px;
     margin: auto;
+    height: 64px;
+    width: 64px;
     &-bottom {
       left: unset;
       top: unset;
       right: 12px;
-      bottom: 57px;
+      bottom: 21px;
       margin: 0;
     }
   }

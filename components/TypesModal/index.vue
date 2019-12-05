@@ -3,7 +3,7 @@
     <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
       <template v-slot:activator="{ on }">
         <div v-on="on">
-          <add-list-item v-on="on" :has-elements="extra" />
+          <add-list-item v-if="!extra || !toggleHidden" v-on="on" :has-elements="extra" />
         </div>
       </template>
       <v-card>
@@ -86,7 +86,11 @@ export default {
         return []
       }
     },
-    autoOpen: Boolean
+    autoOpen: Boolean,
+    toggleHidden: {
+      type: Boolean,
+      default: false
+    }
   },
   data () {
     return {
@@ -100,8 +104,8 @@ export default {
         properties: {
           left: 0,
           top: 0,
-          width: 150,
-          height: 150,
+          width: 50,
+          height: 50,
           text: ''
         }
       },
@@ -113,8 +117,8 @@ export default {
         properties: {
           left: 0,
           top: 0,
-          width: 150,
-          height: 150,
+          width: 50,
+          height: 50,
           src: 'https://picsum.photos/350/165?random'
         }
       }],
